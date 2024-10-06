@@ -137,7 +137,45 @@
     <!-- Main section ends here -->
 
     <!-- Footer section starts here -->
-    <footer></footer>
+    <footer class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 lg:gap-24 bg-color2 px-4 md:px-8 lg:px-12 py-12">
+        <nav>
+            <div class="flex items-center gap-3 mb-4">
+                <img src="images/logo.webp" alt="Logo" />
+                <a class="text-3xl font-lato font-bold text-white">Peddy</a>
+            </div>
+            <div class="text-[#FFFFFFE6] space-y-3 text-base font-lato ">
+                <p>Location: av. Washington 165, NY CA 54003</p>
+                <p>Phone: +31 85 964 47 25</p>
+                <p>Email: info@yourdomain.com</p>
+                <p>Openings hours: 9.00 AM - 5.00 PM</p>
+            </div>
+            <div class="flex items-center gap-4 mt-6">
+                <img class="h-5" src="images/fb.png" alt="">
+                <img class="h-5" src="images/x.png" alt="">
+                <img class="h-5" src="images/youtube.png" alt="">
+                <img class="h-5" src="images/instagram.png" alt="">
+            </div>
+        </nav>
+        <nav class=" text-[#FFFFFF99] text-base font-lato flex flex-col gap-3">
+            <h6 class="text-xl font-semibold text-white mb-4">Useful Links</h6>
+            <a class="link link-hover">Home</a>
+            <a class="link link-hover">About Us</a>
+            <a class="link link-hover">Animals</a>
+            <a class="link link-hover">Foundation</a>
+            <a class="link link-hover">Contacts</a>
+        </nav>
+        <form class="md:col-span-2 lg:col-span-1">
+            <h6 class="text-xl font-semibold text-white mb-4">Drop a Message</h6>
+            <fieldset class="form-control">
+                <input
+                type="text"
+                placeholder="Enter your email" 
+                class="input text-[#FFFFFF99] bg-[#FFFFFF0D] placeholder:text-[#FFFFFF99]" />
+                <br>
+                <button class="btn bg-color1 text-lg text-white border-none hover:text-color2 w-full">Subscribe</button>
+            </fieldset>
+        </form>
+    </footer>
     <!-- Footer section ends here -->
   </body>
 </html>
