@@ -29,6 +29,7 @@ const loadAllPets = () => {
 // Display all pets
 const displayAllPets = (pets) => {
   pets.forEach((pet) => {
+
     const cardContainer = document.getElementById("card-container");
     const card = document.createElement("div");
     card.classList = "card border p-3 rounded-lg";
@@ -39,11 +40,19 @@ const displayAllPets = (pets) => {
             alt=${pet.pet_name}/>
         </div>
         <div class="mt-4 space-y-2">
-            <h2 class="font-inter text-2xl font-bold text-color2">${pet.pet_name}</h2>
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${pet.breed}</p>
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${pet.date_of_birth}</p>
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${pet.gender}</p>
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${pet.price}</p>
+            <h2 class="font-inter text-2xl font-bold text-color2">${
+              pet.pet_name
+            }</h2>
+
+
+
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${pet.breed ? pet.breed : `Not available`}</p>
+            
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${pet.date_of_birth ? pet.date_of_birth : `Not available`}</p>
+
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${pet.gender ? pet.gender : `Not available`}</p>
+
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${pet.price ? pet.price : `Not available`}</p>
             <br/><hr/><br/>
             <div class="card-actions flex items-center justify-center gap-3">
                 <button class="btn border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
