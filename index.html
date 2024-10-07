@@ -124,7 +124,7 @@
                     <p class="font-lato text-color2">
                     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.
                     </p>
-                    <button class="btn bg-color1 text-white text-lg hover:text-black">View More</button>
+                    <a class="btn bg-color1 text-white text-lg hover:text-black" href="#adopt">View More</a>
                 </div>
                 <div>
                     <img src="images/pet.webp" alt="Pet">
@@ -135,12 +135,13 @@
       <!-- Hero section ends here -->
 
       <!-- Adopt section starts here -->
-        <section class="mt-24">
+        <section id="adopt" class="mt-24">
             <div class="md:w-2/3 mx-auto">
                 <h2 class="text-3xl md:text-4xl text-color2 font-extrabold text-center font-lato mb-4">Adopt  Your  Best Friend</h2>
                 <p class="font-lato text-color3 font-medium text-center">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
             </div>
 
+            
             <div id="category-buttons" class="md:w-11/12 mx-auto text-center mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
             </div>
 
@@ -148,17 +149,25 @@
               <h3 class="text-color2 text-2xl font-bold">Best Deal For you</h3>
               <button class="btn bg-color1 text-lg text-white hover:text-black">Sort by Price</button>
             </div>
-
+            
+      <!-- Spinner section starts here -->
+            <div id="spinner" class="w-full mx-auto text-center hidden">
+              <span class="loading loading-bars loading-sm"></span>
+              <span class="loading loading-bars loading-md"></span>
+              <span class="loading loading-bars loading-lg"></span>
+            </div>
+      <!-- Spinner section ends here -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
               <div id="card-container" class="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
               </div>
-              <div class="border rounded-lg grid grid-cols-2 gap-4">
+              <div id="card-container-2" class="border rounded-lg grid grid-cols-2 gap-4">
                
               </div>
             </div>
         </section>
       <!-- Adopt section ends here -->
+       
 
       <!-- Modal section starts here -->
       <div id="modal-container">

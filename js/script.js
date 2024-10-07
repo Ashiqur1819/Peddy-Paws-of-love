@@ -16,7 +16,17 @@ const displayCategories = (categories) => {
     button.innerHTML = `<img src="${item.category_icon}" class="w-10 h-10" alt=""> ${item.category}`;
     categoryButtons.append(button);
     button.addEventListener('click', () => {
-      loadCategoryPets(item.category);
+
+      const spinner = document.getElementById("spinner");
+      spinner.classList.remove('hidden');
+      const cardContainer = document.getElementById("card-container");
+      cardContainer.classList.add("hidden");
+      const cardContainer2 = document.getElementById("card-container-2");
+      cardContainer2.classList.add("hidden");
+
+      setTimeout(() => {
+        loadCategoryPets(item.category);
+      }, 2000);
     })
   });
 };
@@ -26,6 +36,15 @@ const loadCategoryPets = (id) =>  {
   fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     .then((res) => res.json())
     .then((data) => displayAllPets(data.data));
+
+          const spinner = document.getElementById("spinner");
+          spinner.classList.add("hidden");
+
+          const cardContainer = document.getElementById("card-container");
+          cardContainer.classList.remove("hidden");
+
+          const cardContainer2 = document.getElementById("card-container-2");
+          cardContainer2.classList.remove("hidden");
 }
 
 // Load all pets
