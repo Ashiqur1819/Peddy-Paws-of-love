@@ -46,24 +46,87 @@ const displayAllPets = (pets) => {
 
 
 
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${pet.breed ? pet.breed : `Not available`}</p>
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${
+              pet.breed ? pet.breed : `Not available`
+            }</p>
             
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${pet.date_of_birth ? pet.date_of_birth : `Not available`}</p>
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${
+              pet.date_of_birth ? pet.date_of_birth : `Not available`
+            }</p>
 
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${pet.gender ? pet.gender : `Not available`}</p>
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${
+              pet.gender ? pet.gender : `Not available`
+            }</p>
 
-            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${pet.price ? pet.price : `Not available`}</p>
+            <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${
+              pet.price ? pet.price : `Not available`
+            }</p>
             <br/><hr/><br/>
             <div class="card-actions flex items-center justify-center gap-3">
                 <button class="btn border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
                 <button class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
-                <button class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
+                <button onclick="showDetails('${pet.petId}')" class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
             </div>
         </div>
     `;
     cardContainer.append(card)
   });
 };
+
+// Show details
+const showDetails = async(id) => {
+  const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+  const data = await res.json();
+  console.log(data.petData);
+
+  const {image, pet_name, breed, date_of_birth, gender, price, pet_details, vaccinated_status} = data.petData;
+
+  const modalContainer = document.getElementById('modal-container');
+  modalContainer.innerHTML = `
+    <dialog id="my_modal_1" class="modal">
+      <div class="modal-box">
+        <img class="rounded-lg h-60 object-cover w-full" src=${image} alt=""/>
+        <h3 class="text-2xl font-bold mt-4">${pet_name}</h3>
+        <div class="mt-4 md:flex justify-between space-y-2">
+        <div class="space-y-2">
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${
+            breed ? breed : `Not available`
+          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${
+            gender ? gender : `Not available`
+          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Vaccinated status: ${
+            vaccinated_status ? vaccinated_status : `Not available`
+          }</p>
+        </div>
+        <div class="space-y-2">
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${
+            date_of_birth ? date_of_birth : `Not available`
+          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${
+            price ? price : `Not available`
+          }</p>
+        </div>
+        </div>
+        <br/><hr/><br/>
+        <div>
+          <h3 class="font-2xl font-bold">Details Information</h3>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2">${
+            pet_details ? pet_details : `Not available`
+          }</p>
+        </div>
+        <div class="modal-action">
+          <form method="dialog" class="w-full">
+            <button class="btn w-full bg-[#0E7A811A] border-[#0E7A8133] font-semibold text-lg text-color1">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+  `;
+
+  my_modal_1.showModal();
+  
+}
 
 loadCategories();
 loadAllPets();
