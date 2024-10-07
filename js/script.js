@@ -15,8 +15,18 @@ const displayCategories = (categories) => {
       "btn px-12 pt-6 pb-16 text-lg font-bold font-inter bg-white border-[#0E7A8126]";
     button.innerHTML = `<img src="${item.category_icon}" class="w-10 h-10" alt=""> ${item.category}`;
     categoryButtons.append(button);
+    button.addEventListener('click', () => {
+      loadCategoryPets(item.category);
+    })
   });
 };
+
+// Load Category pets
+const loadCategoryPets = (id) =>  {
+  fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    .then((res) => res.json())
+    .then((data) => displayAllPets(data.data));
+}
 
 // Load all pets
 const loadAllPets = () => {
@@ -28,9 +38,9 @@ const loadAllPets = () => {
 
 // Display all pets
 const displayAllPets = (pets) => {
+      const cardContainer = document.getElementById("card-container");
+      cardContainer.innerHTML = "";
   pets.forEach((pet) => {
-
-    const cardContainer = document.getElementById("card-container");
     const card = document.createElement("div");
     card.classList = "card border p-3 rounded-lg";
     card.innerHTML = `
