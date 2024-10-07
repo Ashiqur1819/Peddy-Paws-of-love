@@ -92,7 +92,7 @@ const displayAllPets = (pets) => {
             }</p>
             <br/><hr/><br/>
             <div class="card-actions flex items-center justify-center gap-3">
-                <button class="btn border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
+                <button onclick="pickImage('${pet.petId}')" class="btn border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
                 <button class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
                 <button onclick="showDetails('${pet.petId}')" class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
             </div>
@@ -100,6 +100,24 @@ const displayAllPets = (pets) => {
     `;
     cardContainer.append(card)
   });
+};
+
+// Pick image
+const pickImage = async(id) => {
+  const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+  const data = await res.json();
+  console.log(data.petData);
+
+  const {image} = data.petData;
+
+  const cardContainer2 = document.getElementById("card-container-2");
+  const content = document.getElementById("content");
+  const div = document.createElement('div');
+  div.innerHTML = `
+     <img class="rounded-lg h-36 object-cover" src=${image} alt="">
+  `;
+  content.appendChild(div);
+
 };
 
 // Show details
@@ -152,7 +170,6 @@ const showDetails = async(id) => {
       </div>
     </dialog>
   `;
-
   my_modal_1.showModal();
   
 }
