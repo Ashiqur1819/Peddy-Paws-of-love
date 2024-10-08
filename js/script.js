@@ -10,6 +10,7 @@ const loadCategories = () => {
 const displayCategories = (categories) => {
   categories.forEach((item) => {
     const categoryButtons = document.getElementById("category-buttons");
+    categoryButtons.classList.add('flex', 'item-center', 'gap-6', 'md:gap-12', 'lg:gap-24')
     const button = document.createElement("button");
     button.classList =
       "btn category-btn px-12 pt-6 pb-16 text-lg font-bold font-inter bg-white border-[#0E7A8126]";
@@ -33,6 +34,8 @@ const displayCategories = (categories) => {
 
 // Countdown
 const showCountdown = () => {
+  
+  my_modal_2.showModal();
   const h3 = document.getElementById("count");
   let count = 3;
 
@@ -50,7 +53,6 @@ const showCountdown = () => {
     document.getElementById('close').click()
   }, 3000);
 
-  my_modal_2.showModal();
 };
 
 // Remove active class
@@ -101,7 +103,7 @@ const displayAllPets = (pets) => {
 
   if (pets.length === 0) {
     cardContainer.innerHTML = `
-      <div class="w-full text-center col-span-3 bg-gray-100 p-12 border rounded-lg">
+      <div class="w-full text-center col-span-3 bg-gray-100 p-4 md:p-6 lg:p-12 border rounded-lg">
          <img src="images/error.webp" class="p-2  mx-auto" alt="">
          <h3 class="text-4xl font-inter font-bold text-color2 mb-3">No Information Available</h3>
          <p class="color3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cumque omnis vitae obcaecati pariatur. Molestias repellat atque maiores nostrum, aperiam recusandae assumenda suscipit dolorum sequi.</p>
@@ -122,29 +124,29 @@ const displayAllPets = (pets) => {
           <h2 class="font-inter text-2xl font-bold text-color2">${
             pet.pet_name
           }</h2>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${
+          <p class="font-lato text-color3 font-semibold text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${
             pet.breed ? pet.breed : `Not available`
           }</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${
+          <p class="font-lato text-color3 font-semibold text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${
             pet.date_of_birth ? pet.date_of_birth : `Not available`
           }</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${
+          <p class="font-lato text-color3 font-semibold text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${
             pet.gender ? pet.gender : `Not available`
           }</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${
+          <p class="font-lato text-color3 font-semibold text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${
             pet.price ? pet.price : `Not available`
           }</p>
           <br/><hr/><br/>
-          <div class="card-actions flex items-center justify-center gap-3">
+          <div class="card-actions flex items-center justify-between gap-3">
               <button onclick="pickImage('${
                 pet.petId
-              }')" class="btn border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
+              }')" class="btn font-lato border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
               <button onclick="showCountdown('${
                 pet.petId
-              }')" class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
+              }')" class="btn font-lato border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
               <button onclick="showDetails('${
                 pet.petId
-              }')" class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
+              }')" class="btn font-lato border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
           </div>
       </div>
     `;
@@ -165,7 +167,7 @@ const pickImage = async (id) => {
   const content = document.getElementById("content");
   const div = document.createElement("div");
   div.innerHTML = `
-     <img class="rounded-lg h-36 object-cover" src=${image} alt="">
+     <img class="rounded-lg h-32 w-full object-cover" src=${image} alt="">
   `;
   content.appendChild(div);
 };
@@ -236,6 +238,16 @@ const showDetails = async (id) => {
 
 // Sort
 const sortedPrice = () => {
+fetch("https://openapi.programming-hero.com/api/peddy/pets")
+.then(res => res.json())
+.then(data => {
+  const newArray = [];
+  const data2 = data.pets;
+  data2.sort((a, b) => b.price - a.price)
+  // newArray.sort((a, b) =>  b - a);
+
+});
+
 
 
 }
