@@ -13,13 +13,12 @@ const displayCategories = (categories) => {
     const button = document.createElement("button");
     button.classList =
       "btn category-btn px-12 pt-6 pb-16 text-lg font-bold font-inter bg-white border-[#0E7A8126]";
-    button.id = `btn-${item.category}`
+    button.id = `btn-${item.category}`;
     button.innerHTML = `<img src="${item.category_icon}" class="w-10 h-10" alt=""> ${item.category}`;
     categoryButtons.append(button);
-    button.addEventListener('click', () => {
-
+    button.addEventListener("click", () => {
       const spinner = document.getElementById("spinner");
-      spinner.classList.remove('hidden');
+      spinner.classList.remove("hidden");
       const cardContainer = document.getElementById("card-container");
       cardContainer.classList.add("hidden");
       const cardContainer2 = document.getElementById("card-container-2");
@@ -28,58 +27,64 @@ const displayCategories = (categories) => {
       setTimeout(() => {
         loadCategoryPets(item.category);
       }, 2000);
-    })
+    });
   });
 };
 
 // Countdown
-// const showCountdown = () => {
-//   let count = 3;
+const showCountdown = () => {
+  const h3 = document.getElementById("count");
+  let count = 3;
 
-//   for(let i = 0; i <= count.length; i++){
-//     setInterval(() => {
-//           count--;
-//           console.log(count);
-//     }, 1000);
-//   }
-// }
+  const countdown = setInterval(() => {
+    count--
+    h3.innerText = count;
 
-// showCountdown()
+
+    if(count === 1){
+      clearInterval(countdown);
+    }
+  }, 1000);
+
+  setTimeout(() => {
+    document.getElementById('close').click()
+  }, 3000);
+
+  my_modal_2.showModal();
+};
 
 // Remove active class
 const removeActiveClass = () => {
-const activeBtn = document.querySelectorAll(".category-btn");
-for (btn of activeBtn) {
-  btn.classList.remove("bg-[#0E7A811A]", "border-[#0E7A81]", "rounded-full");
-}
-}
+  const activeBtn = document.querySelectorAll(".category-btn");
+  for (btn of activeBtn) {
+    btn.classList.remove("bg-[#0E7A811A]", "border-[#0E7A81]", "rounded-full");
+  }
+};
 // Load Category pets
-const loadCategoryPets = (id) =>  {
+const loadCategoryPets = (id) => {
   fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     .then((res) => res.json())
     .then((data) => {
-removeActiveClass()
-      const activeBtn = document.getElementById(`btn-${id}`)
-      console.log(activeBtn)
-      activeBtn.classList.add( 'bg-[#0E7A811A]', 'border-[#0E7A81]', 'rounded-full');
+      removeActiveClass();
+      const activeBtn = document.getElementById(`btn-${id}`);
+      console.log(activeBtn);
+      activeBtn.classList.add(
+        "bg-[#0E7A811A]",
+        "border-[#0E7A81]",
+        "rounded-full"
+      );
       displayAllPets(data.data);
 
-                const spinner = document.getElementById("spinner");
-                spinner.classList.add("hidden");
+      const spinner = document.getElementById("spinner");
+      spinner.classList.add("hidden");
 
-                const cardContainer = document.getElementById("card-container");
-                cardContainer.classList.remove("hidden");
+      const cardContainer = document.getElementById("card-container");
+      cardContainer.classList.remove("hidden");
 
-                const cardContainer2 =
-                  document.getElementById("card-container-2");
-                cardContainer2.classList.remove("hidden");
-          
+      const cardContainer2 = document.getElementById("card-container-2");
+      cardContainer2.classList.remove("hidden");
     });
-
-
-
-
-}
+};
 
 // Load all pets
 const loadAllPets = () => {
@@ -94,7 +99,7 @@ const displayAllPets = (pets) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
 
-  if(pets.length === 0){
+  if (pets.length === 0) {
     cardContainer.innerHTML = `
       <div class="w-full text-center col-span-3 bg-gray-100 p-12 border rounded-lg">
          <img src="images/error.webp" class="p-2  mx-auto" alt="">
@@ -109,37 +114,56 @@ const displayAllPets = (pets) => {
     card.classList = "card border p-3 rounded-lg";
     card.innerHTML = `
       <div>
-          <img class="rounded-lg h-48 object-cover w-full" src=${pet.image} alt=${pet.pet_name}/>
+          <img class="rounded-lg h-48 object-cover w-full" src=${
+            pet.image
+          } alt=${pet.pet_name}/>
       </div>
       <div class="mt-4 space-y-2">
-          <h2 class="font-inter text-2xl font-bold text-color2">${pet.pet_name}</h2>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${pet.breed ? pet.breed : `Not available`}</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${pet.date_of_birth ? pet.date_of_birth : `Not available`}</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${pet.gender ? pet.gender : `Not available`}</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${pet.price ? pet.price : `Not available`}</p>
+          <h2 class="font-inter text-2xl font-bold text-color2">${
+            pet.pet_name
+          }</h2>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${
+            pet.breed ? pet.breed : `Not available`
+          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${
+            pet.date_of_birth ? pet.date_of_birth : `Not available`
+          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${
+            pet.gender ? pet.gender : `Not available`
+          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${
+            pet.price ? pet.price : `Not available`
+          }</p>
           <br/><hr/><br/>
           <div class="card-actions flex items-center justify-center gap-3">
-              <button onclick="pickImage('${pet.petId}')" class="btn border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
-              <button class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
-              <button onclick="showDetails('${pet.petId}')" class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
+              <button onclick="pickImage('${
+                pet.petId
+              }')" class="btn border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
+              <button onclick="showCountdown('${
+                pet.petId
+              }')" class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
+              <button onclick="showDetails('${
+                pet.petId
+              }')" class="btn border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
           </div>
       </div>
     `;
-    cardContainer.append(card)
+    cardContainer.append(card);
   });
 };
 
 // Pick image
-const pickImage = async(id) => {
-  const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+const pickImage = async (id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+  );
   const data = await res.json();
   console.log(data.petData);
 
-  const {image} = data.petData;
+  const { image } = data.petData;
 
-  const cardContainer2 = document.getElementById("card-container-2");
   const content = document.getElementById("content");
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   div.innerHTML = `
      <img class="rounded-lg h-36 object-cover" src=${image} alt="">
   `;
@@ -147,14 +171,25 @@ const pickImage = async(id) => {
 };
 
 // Show details
-const showDetails = async(id) => {
-  const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+const showDetails = async (id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+  );
   const data = await res.json();
   console.log(data.petData);
 
-  const {image, pet_name, breed, date_of_birth, gender, price, pet_details, vaccinated_status} = data.petData;
+  const {
+    image,
+    pet_name,
+    breed,
+    date_of_birth,
+    gender,
+    price,
+    pet_details,
+    vaccinated_status,
+  } = data.petData;
 
-  const modalContainer = document.getElementById('modal-container');
+  const modalContainer = document.getElementById("modal-container");
   modalContainer.innerHTML = `
     <dialog id="my_modal_1" class="modal">
       <div class="modal-box">
@@ -197,6 +232,12 @@ const showDetails = async(id) => {
     </dialog>
   `;
   my_modal_1.showModal();
+};
+
+// Sort
+const sortedPrice = () => {
+
+
 }
 
 loadCategories();

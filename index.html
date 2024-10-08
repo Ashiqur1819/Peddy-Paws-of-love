@@ -146,7 +146,7 @@
 
             <div class="flex items-center justify-between mt-12">
               <h3 class="text-color2 text-2xl font-bold">Best Deal For you</h3>
-              <button class="btn bg-color1 text-lg text-white hover:text-black">Sort by Price</button>
+              <button onclick="sortedPrice()" id="sort" class="btn bg-color1 text-lg text-white hover:text-black">Sort by Price</button>
             </div>
 
       <!-- Spinner section starts here -->
@@ -169,27 +169,28 @@
 
       <!-- Modal section starts here -->
       <div id="modal-container">
-          
+          <dialog id="my_modal_2" class="modal">
+      <div class="modal-box">
+        <img src="images/handshake.png" class="w-20 mx-auto" alt="">
+        <h3 class="text-4xl font-bold text-color2 text-center">Congrates</h3>
+        <p class="py-4 text-center">Adoption process is start for your pet</p>
+        <h3 id="count" class="font-bold text-5xl text-center color2">3</h3>
+        <div class="modal-action">
+          <form method="dialog">
+            <button id="close" class="btn hidden">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
       </div>
       <!-- Modal section ends here -->
 
       <!-- Countdown section starts here -->
-      <!-- <div id="countdown-container">
-       
-<button class="btn" onclick="my_modal_1.showModal()">open modal</button>
-<dialog id="my_modal_1" class="modal">
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
-    <div class="modal-action">
-      <form method="dialog">
-      
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
-      </div> -->
+      <div id="countdown-container">
+        <h3 id="count"></h3>
+<!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+
+      </div>
       <!-- Countdown section ends here -->
     </main>
     <!-- Main section ends here -->
