@@ -25,17 +25,26 @@ const displayCategories = (categories) => {
       const cardContainer2 = document.getElementById("card-container-2");
       cardContainer2.classList.add("hidden");
 
-      // button.classList = "btn px-12 pt-6 pb-16 text-lg font-bold font-inter bg-[#0E7A811A] border-[#0E7A81] rounded-full";
-      
-
-      
-      
       setTimeout(() => {
         loadCategoryPets(item.category);
-      }, 1000);
+      }, 2000);
     })
   });
 };
+
+// Countdown
+// const showCountdown = () => {
+//   let count = 3;
+
+//   for(let i = 0; i <= count.length; i++){
+//     setInterval(() => {
+//           count--;
+//           console.log(count);
+//     }, 1000);
+//   }
+// }
+
+// showCountdown()
 
 // Remove active class
 const removeActiveClass = () => {
@@ -82,8 +91,19 @@ const loadAllPets = () => {
 
 // Display all pets
 const displayAllPets = (pets) => {
-      const cardContainer = document.getElementById("card-container");
-      cardContainer.innerHTML = "";
+  const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
+
+  if(pets.length === 0){
+    cardContainer.innerHTML = `
+      <div class="w-full text-center col-span-3 bg-gray-100 p-12 border rounded-lg">
+         <img src="images/error.webp" class="p-2  mx-auto" alt="">
+         <h3 class="text-4xl font-inter font-bold text-color2 mb-3">No Information Available</h3>
+         <p class="color3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cumque omnis vitae obcaecati pariatur. Molestias repellat atque maiores nostrum, aperiam recusandae assumenda suscipit dolorum sequi.</p>
+      </div>
+    `;
+  }
+
   pets.forEach((pet) => {
     const card = document.createElement("div");
     card.classList = "card border p-3 rounded-lg";
