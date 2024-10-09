@@ -34,7 +34,6 @@ const displayCategories = (categories) => {
 
 // Countdown
 const showCountdown = () => {
-  
   my_modal_2.showModal();
   const h3 = document.getElementById("count");
   let count = 3;
@@ -44,7 +43,7 @@ const showCountdown = () => {
     h3.innerText = count;
 
 
-    if(count === 1){
+    if(count <= 1){
       clearInterval(countdown);
     }
   }, 1000);
