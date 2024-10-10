@@ -23,7 +23,7 @@ const displayCategories = (categories) => {
       const cardContainer = document.getElementById("card-container");
       cardContainer.classList.add("hidden");
       const cardContainer2 = document.getElementById("card-container-2");
-      cardContainer2.classList.add("hidden");
+      cardContainer2.classList.add("hidden")
 
       setTimeout(() => {
         loadCategoryPets(item.category);
@@ -32,35 +32,6 @@ const displayCategories = (categories) => {
   });
 };
 
-// Countdown
-const showCountdown = () => {
-  my_modal_2.showModal();
-  const h3 = document.getElementById("count");
-  let count = 3;
-
-  const countdown = setInterval(() => {
-    count--
-    h3.innerText = count;
-
-
-    if(count <= 1){
-      clearInterval(countdown);
-    }
-  }, 1000);
-
-  setTimeout(() => {
-    document.getElementById('close').click()
-  }, 3000);
-
-};
-
-// Remove active class
-const removeActiveClass = () => {
-  const activeBtn = document.querySelectorAll(".category-btn");
-  for (btn of activeBtn) {
-    btn.classList.remove("bg-[#0E7A811A]", "border-[#0E7A81]", "rounded-full");
-  }
-};
 // Load Category pets
 const loadCategoryPets = (id) => {
   fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
@@ -68,7 +39,6 @@ const loadCategoryPets = (id) => {
     .then((data) => {
       removeActiveClass();
       const activeBtn = document.getElementById(`btn-${id}`);
-      console.log(activeBtn);
       activeBtn.classList.add(
         "bg-[#0E7A811A]",
         "border-[#0E7A81]",
@@ -87,12 +57,22 @@ const loadCategoryPets = (id) => {
     });
 };
 
+// Remove active class
+const removeActiveClass = () => {
+  const activeBtn = document.querySelectorAll(".category-btn");
+  for (btn of activeBtn) {
+    btn.classList.remove("bg-[#0E7A811A]", "border-[#0E7A81]", "rounded-full");
+  }
+};
+
+
 // Load all pets
 const loadAllPets = () => {
   fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then((res) => res.json())
     .then((data) => displayAllPets(data.pets))
     .catch((err) => console.log(err));
+
 };
 
 // Display all pets
@@ -105,7 +85,7 @@ const displayAllPets = (pets) => {
       <div class="w-full text-center col-span-3 bg-gray-100 p-4 md:p-6 lg:p-12 border rounded-lg">
          <img src="images/error.webp" class="p-2  mx-auto" alt="">
          <h3 class="text-4xl font-inter font-bold text-color2 mb-3">No Information Available</h3>
-         <p class="color3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cumque omnis vitae obcaecati pariatur. Molestias repellat atque maiores nostrum, aperiam recusandae assumenda suscipit dolorum sequi.</p>
+         <p class="color3">This may be due to various reasons, such as incomplete research, ongoing updates, privacy restrictions, or technical limitations. It suggests that the relevant information has not been gathered yet or is being withheld for security, privacy, or compliance reasons.</p>
       </div>
     `;
   }
@@ -142,7 +122,7 @@ const displayAllPets = (pets) => {
               }')" class="btn font-lato border-[#0E7A8126] bg-white text-lg font-semibold"><i class="fa-regular fa-thumbs-up"></i></button>
               <button onclick="showCountdown('${
                 pet.petId
-              }')" class="btn font-lato border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
+              }')" id="adopt-btn" class="btn font-lato border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Adopt</button>
               <button onclick="showDetails('${
                 pet.petId
               }')" class="btn font-lato border-[#0E7A8126] bg-white text-color1 text-lg font-semibold">Details</button>
@@ -151,6 +131,8 @@ const displayAllPets = (pets) => {
     `;
     cardContainer.append(card);
   });
+
+ sortByPrice(pets);
 };
 
 // Pick image
@@ -159,7 +141,6 @@ const pickImage = async (id) => {
     `https://openapi.programming-hero.com/api/peddy/pet/${id}`
   );
   const data = await res.json();
-  console.log(data.petData);
 
   const { image } = data.petData;
 
@@ -171,24 +152,38 @@ const pickImage = async (id) => {
   content.appendChild(div);
 };
 
+
+// Countdown
+const showCountdown = () => {
+  my_modal_2.showModal();
+  const h3 = document.getElementById("count");
+  let count = 3;
+
+  const countdown = setInterval(() => {
+    count--;
+    h3.innerText = count;
+
+    if(count <= 1){
+      clearInterval(countdown);
+    }
+  }, 1000);
+
+  setTimeout(() => {
+    document.getElementById('close').click()
+  }, 3000);
+
+  h3.innerText = count;
+};
+
+
 // Show details
 const showDetails = async (id) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/pet/${id}`
   );
   const data = await res.json();
-  console.log(data.petData);
 
-  const {
-    image,
-    pet_name,
-    breed,
-    date_of_birth,
-    gender,
-    price,
-    pet_details,
-    vaccinated_status,
-  } = data.petData;
+  const {image, pet_name, breed, date_of_birth, gender, price, pet_details, vaccinated_status} = data.petData;
 
   const modalContainer = document.getElementById("modal-container");
   modalContainer.innerHTML = `
@@ -198,23 +193,13 @@ const showDetails = async (id) => {
         <h3 class="text-2xl font-bold mt-4">${pet_name}</h3>
         <div class="mt-4 md:flex justify-between space-y-2">
         <div class="space-y-2">
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${
-            breed ? breed : `Not available`
-          }</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${
-            gender ? gender : `Not available`
-          }</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Vaccinated status: ${
-            vaccinated_status ? vaccinated_status : `Not available`
-          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame1.png" alt="">Breed: ${breed ? breed : `Not available`}</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${gender ? gender : `Not available`}</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Vaccinated status: ${vaccinated_status ? vaccinated_status : `Not available`}</p>
         </div>
         <div class="space-y-2">
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${
-            date_of_birth ? date_of_birth : `Not available`
-          }</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${
-            price ? price : `Not available`
-          }</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${date_of_birth ? date_of_birth : `Not available`}</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${price ? price : `Not available`}</p>
         </div>
         </div>
         <br/><hr/><br/>
@@ -236,20 +221,26 @@ const showDetails = async (id) => {
 };
 
 // Sort
-const sortedPrice = () => {
-fetch("https://openapi.programming-hero.com/api/peddy/pets")
-.then(res => res.json())
-.then(data => {
-  const newArray = [];
-  const data2 = data.pets;
-  data2.sort((a, b) => b.price - a.price)
-  // newArray.sort((a, b) =>  b - a);
+const sortByPrice = (pets) => {
+  fetch("https://openapi.programming-hero.com/api/peddy/pets")
+    .then((res) => res.json())
+    .then((data) => {
+      const a = [];
+      // displayAllPets(data.data);
+      const sorts = data.pets;
+      console.log(sorts);
+      sorts.forEach((sort) => {
+        const price = sort.price;
+        a.push(price);
+      });
+      a.sort((a, b) => b - a);
+      console.log(a)
+    })
+    .catch((err) => console.log(err));
+};
 
-});
 
 
-
-}
 
 loadCategories();
 loadAllPets();
