@@ -131,8 +131,6 @@ const displayAllPets = (pets) => {
     `;
     cardContainer.append(card);
   });
-
- sortByPrice(pets);
 };
 
 // Pick image
@@ -221,26 +219,13 @@ const showDetails = async (id) => {
 };
 
 // Sort
-const sortByPrice = (pets) => {
-  fetch("https://openapi.programming-hero.com/api/peddy/pets")
-    .then((res) => res.json())
-    .then((data) => {
-      const a = [];
-      // displayAllPets(data.data);
-      const sorts = data.pets;
-      console.log(sorts);
-      sorts.forEach((sort) => {
-        const price = sort.price;
-        a.push(price);
-      });
-      a.sort((a, b) => b - a);
-      console.log(a)
-    })
-    .catch((err) => console.log(err));
+const sortByPrice = async() => {
+  const res = await fetch("https://openapi.programming-hero.com/api/peddy/pets")
+  const data = await res.json()
+    const sortPets = data.pets;
+    sortPets.sort((a, b) => b.price - a.price);
+    displayAllPets(sortPets);
 };
-
-
-
 
 loadCategories();
 loadAllPets();
