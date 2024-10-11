@@ -60,7 +60,7 @@ const loadCategoryPets = (id) => {
 // Remove active class function
 const removeActiveClass = () => {
   const activeBtn = document.querySelectorAll(".category-btn");
-  for (btn of activeBtn) {
+  for (const btn of activeBtn) {
     btn.classList.remove("bg-[#0E7A811A]", "border-[#0E7A81]", "rounded-full");
   }
 };
@@ -253,6 +253,7 @@ const onLoad = () => {
       const cardContainer = document.getElementById("card-container");
       cardContainer.classList.add("hidden");
       const cardContainer2 = document.getElementById("card-container-2");
+      console.log(cardContainer2)
       cardContainer2.classList.add("hidden");
 
       setTimeout(() => {

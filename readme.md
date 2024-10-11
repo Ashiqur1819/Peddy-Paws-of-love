@@ -11,7 +11,7 @@ Paws of Love is a pet adoption platform that aims to connect loving families wit
     04. Location and Contact Info: Contact details are included for queries related to adoption.
     05. Subscription Option: Visitors can subscribe for updates.
 
-# 04. ES6 Features =>
+# 04. ES6 Features what I have used =>
     * Arrow Functions: Cleaner syntax for writing functions.
     * Template Literals: For easier string concatenation.
     * let/const: Block-scoped variable declarations.
