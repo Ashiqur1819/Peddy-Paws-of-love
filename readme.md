@@ -19,4 +19,4 @@ Paws of Love is a pet adoption platform that aims to connect loving families wit
     * Classes: For structuring the code in a more object-oriented manner.
 
 # 05. Live Link => 
-## https://assigment-06-peddy.netlify.app/
+## https://assignment-6-peddy-paws-of-love.netlify.app/
