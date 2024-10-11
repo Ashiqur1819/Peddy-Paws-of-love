@@ -1,5 +1,5 @@
 # 01. Project Name => 
-## Assignment-06: Paws of Love 🐾
+## Peddy || Paws of Love 🐾
 
 # 02. Description => 
 Paws of Love is a pet adoption platform that aims to connect loving families with homeless pets in search of a forever home. With its intuitive interface and heartwarming mission, the platform simplifies the process of finding the perfect companion, whether you're looking for a playful pup or a gentle kitten. Our goal is to help animals find homes while making it easier for adopters to find their perfect match.
@@ -19,3 +19,4 @@ Paws of Love is a pet adoption platform that aims to connect loving families wit
     * Classes: For structuring the code in a more object-oriented manner.
 
 # 05. Live Link => 
+## https://assigment-06-peddy.netlify.app/

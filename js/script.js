@@ -1,4 +1,4 @@
-// Load categories
+// Load categories function
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/peddy/categories")
     .then((res) => res.json())
@@ -6,7 +6,7 @@ const loadCategories = () => {
     .catch((err) => console.log(err));
 };
 
-// Display categories
+// Display categories function
 const displayCategories = (categories) => {
   categories.forEach((item) => {
     const categoryButtons = document.getElementById("category-buttons");
@@ -32,7 +32,7 @@ const displayCategories = (categories) => {
   });
 };
 
-// Load Category pets
+// Load Category pets function
 const loadCategoryPets = (id) => {
   fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     .then((res) => res.json())
@@ -57,7 +57,7 @@ const loadCategoryPets = (id) => {
     });
 };
 
-// Remove active class
+// Remove active class function
 const removeActiveClass = () => {
   const activeBtn = document.querySelectorAll(".category-btn");
   for (btn of activeBtn) {
@@ -66,7 +66,7 @@ const removeActiveClass = () => {
 };
 
 
-// Load all pets
+// Load all pets function
 const loadAllPets = () => {
   fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then((res) => res.json())
@@ -75,7 +75,7 @@ const loadAllPets = () => {
 
 };
 
-// Display all pets
+// Display all pets function
 const displayAllPets = (pets) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
@@ -112,7 +112,7 @@ const displayAllPets = (pets) => {
           <p class="font-lato text-color3 font-semibold text-base flex items-center gap-2"><img src="images/frame3.png" alt="">Gender: ${
             pet.gender ? pet.gender : `Not available`
           }</p>
-          <p class="font-lato text-color3 font-semibold text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${
+          <p class="font-lato text-color3 font-semibold text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: $${
             pet.price ? pet.price : `Not available`
           }</p>
           <br/><hr/><br/>
@@ -132,8 +132,8 @@ const displayAllPets = (pets) => {
     cardContainer.append(card);
   });
 };
-
-// Pick image
+ 
+// Pick image function
 const pickImage = async (id) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/pet/${id}`
@@ -144,6 +144,7 @@ const pickImage = async (id) => {
 
   const content = document.getElementById("content");
   const div = document.createElement("div");
+  div.classList.add("border", "p-2", "rounded-lg");
   div.innerHTML = `
      <img class="rounded-lg h-32 w-full object-cover" src=${image} alt="">
   `;
@@ -151,7 +152,7 @@ const pickImage = async (id) => {
 };
 
 
-// Countdown
+// Countdown function
 const showCountdown = () => {
   my_modal_2.showModal();
   const h3 = document.getElementById("count");
@@ -174,7 +175,7 @@ const showCountdown = () => {
 };
 
 
-// Show details
+// Show details function
 const showDetails = async (id) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/pet/${id}`
@@ -197,7 +198,7 @@ const showDetails = async (id) => {
         </div>
         <div class="space-y-2">
           <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame2.png" alt="">Birth: ${date_of_birth ? date_of_birth : `Not available`}</p>
-          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: ${price ? price : `Not available`}</p>
+          <p class="font-lato text-color3 font-medium text-base flex items-center gap-2"><img src="images/frame4.png" alt="">Price: $${price ? price : `Not available`}</p>
         </div>
         </div>
         <br/><hr/><br/>
@@ -218,14 +219,52 @@ const showDetails = async (id) => {
   my_modal_1.showModal();
 };
 
-// Sort
+// Sort function
 const sortByPrice = async() => {
   const res = await fetch("https://openapi.programming-hero.com/api/peddy/pets")
-  const data = await res.json()
+  const data = await res.json();
+
+    const spinner = document.getElementById("spinner");
+    spinner.classList.remove("hidden");
+    const cardContainer = document.getElementById("card-container");
+    cardContainer.classList.add("hidden");
+    const cardContainer2 = document.getElementById("card-container-2");
+    cardContainer2.classList.add("hidden");
+
     const sortPets = data.pets;
     sortPets.sort((a, b) => b.price - a.price);
-    displayAllPets(sortPets);
+    
+    setTimeout(() => {
+      displayAllPets(sortPets)
+      const spinner = document.getElementById("spinner");
+      spinner.classList.add("hidden");
+      const cardContainer = document.getElementById("card-container");
+      cardContainer.classList.remove("hidden");
+      const cardContainer2 = document.getElementById("card-container-2");
+      cardContainer2.classList.remove("hidden");
+    }, 2000);
+    
 };
 
+// Reload
+const onLoad = () => {
+      const spinner = document.getElementById("spinner");
+      spinner.classList.remove("hidden");
+      const cardContainer = document.getElementById("card-container");
+      cardContainer.classList.add("hidden");
+      const cardContainer2 = document.getElementById("card-container-2");
+      cardContainer2.classList.add("hidden");
+
+      setTimeout(() => {
+        const spinner = document.getElementById("spinner");
+        spinner.classList.add("hidden");
+        const cardContainer = document.getElementById("card-container");
+        cardContainer.classList.remove("hidden");
+        const cardContainer2 = document.getElementById("card-container-2");
+        cardContainer2.classList.remove("hidden");
+      }, 2000);
+}
+
+window.location.reload = onLoad()
 loadCategories();
 loadAllPets();
